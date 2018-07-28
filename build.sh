@@ -1,0 +1,1 @@
+7z a -tzip yt_embed_on_signin.zip manifest.json index.js icons

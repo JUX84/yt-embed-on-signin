@@ -1,0 +1,1 @@
+"C:\Program Files\7-Zip\7z.exe" a -tzip yt_embed_on_signin.zip .\manifest.json .\index.js .\icons
