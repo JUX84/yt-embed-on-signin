@@ -1,24 +1,20 @@
 const embed = () => { // replace title with link to embedded video
     const title = document.querySelector('div#info > div#info-contents div#container > h1.title');
     if (title) {
-        const link = document.createElement('a');
-        const url = new URL(window.location.href);
-        const params = url.searchParams;
-        const v = params.get('v');
+        const a = document.createElement('a');
+        const { protocol, hostname, searchParams } = new URL(window.location.href);
 
-        link.setAttribute('href', `${url.protocol}//${url.hostname}/embed/${v}`);
+        a.setAttribute('href', `${protocol}//${hostname}/embed/${searchParams.get('v')}`);
 
-        title.parentElement.replaceChild(link, title);
-        link.appendChild(title);
+        title.parentElement.replaceChild(a, title);
+        a.appendChild(title);
     }
 };
 
 const check = setInterval(() => { // wait for youtube to load
-    const video = document.querySelector('div#player video');
-    const btn = document.querySelector('div#player div#info');
-    if (video) { // video loaded correctly
+    if (document.querySelector('div#player video')) { // video loaded correctly
         clearInterval(check);
-    } else if (btn) { // something happened, try to embed
+    } else if (document.querySelector('div#player div#info')) { // something happened, try to embed
         embed();
         clearInterval(check);
     }
